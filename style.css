@@ -1,0 +1,371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: "Trebuchet MS", sans-serif;
+    background-color: #fff0ed;
+    background-image:
+        linear-gradient(#f7d9d9 1px, transparent 1px),
+        linear-gradient(90deg, #f7d9d9 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: #333;
+}
+
+/* Hanging Decoration */
+.decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    border-top: 2px solid #ef9da9;
+    z-index: 2;
+}
+
+.flags {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.flags span {
+    color: #f58ba5;
+    font-size: 23px;
+    transform: rotate(180deg);
+    animation: swing 2s infinite alternate ease-in-out;
+}
+
+.flags span:nth-child(even) {
+    color: #ffb7c5;
+    animation-delay: 0.5s;
+}
+
+@keyframes swing {
+    from {
+        transform: rotate(165deg);
+    }
+    to {
+        transform: rotate(195deg);
+    }
+}
+
+/* Main Container */
+.birthday-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 90px 20px 50px;
+}
+
+/* Birthday Text */
+.birthday-title {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: appear 1.5s ease;
+}
+
+.birthday-title h1 {
+    font-size: clamp(38px, 7vw, 65px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: white;
+    -webkit-text-stroke: 1.5px #444;
+    text-shadow: 3px 4px #b7a9a9;
+}
+
+.birthday-title .pink-text {
+    color: #ff7b91;
+    -webkit-text-stroke: 1px #5a4545;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Date */
+.date {
+    width: fit-content;
+    margin: 25px auto;
+    padding: 5px 24px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background: #ff8197;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 3px #d8a0a7;
+}
+
+/* Main Image */
+.main-character {
+    width: 230px;
+    height: 230px;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #444;
+    border-radius: 48% 48% 45% 45%;
+    background: #fffaf1;
+    overflow: hidden;
+    animation: float 3s ease-in-out infinite;
+}
+
+.main-character img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.buttons button {
+    padding: 8px 25px;
+    background: #ff8197;
+    border: 1px solid #444;
+    border-radius: 20px;
+    font-weight: bold;
+    box-shadow: 0 3px #d6a1a8;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    transform: translateY(-3px);
+    background: #ffb2c0;
+}
+
+/* Small Image */
+.small-character {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: 12%;
+    bottom: 80px;
+    animation: float 2.5s ease-in-out infinite;
+}
+
+.small-character img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Floating Hearts */
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -30px;
+    color: #ff7194;
+    font-size: 20px;
+    animation: rise linear forwards;
+}
+
+@keyframes rise {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Like Button */
+.like-box {
+    position: fixed;
+    right: 15px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: #777;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.heart-icon {
+    font-size: 36px;
+    color: white;
+    -webkit-text-stroke: 1px #fff;
+    text-shadow: 0 1px 3px #777;
+}
+
+.like-box.liked .heart-icon {
+    color: #ff6689;
+}
+
+/* Letter Popup */
+.overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.48);
+    z-index: 10;
+}
+
+.overlay.active {
+    display: flex;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.letter {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    padding: 20px;
+    border: 2px solid #e2d9c9;
+    border-radius: 8px;
+    background: #fff8e7;
+    box-shadow: 0 8px 30px #3334;
+    animation: letterOpen 0.5s ease;
+}
+
+@keyframes letterOpen {
+    from {
+        transform: scale(0.7) rotate(-3deg);
+    }
+    to {
+        transform: scale(1) rotate(0);
+    }
+}
+
+.close-btn {
+    position: absolute;
+    right: 8px;
+    top: 5px;
+    border: none;
+    background: none;
+    font-size: 28px;
+    color: #777;
+}
+
+.letter-header {
+    padding-bottom: 12px;
+    text-align: center;
+    font-family: cursive;
+    font-style: italic;
+}
+
+.letter-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.letter-image {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffb5c5;
+}
+
+.letter-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+}
+
+.letter-text {
+    padding: 8px 0;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.letter-text h4 {
+    margin-bottom: 10px;
+    color: #f16e8a;
+}
+
+.letter-text p {
+    margin-bottom: 10px;
+}
+
+.signature {
+    font-family: cursive;
+    font-weight: bold;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .birthday-container {
+        padding-top: 100px;
+    }
+
+    .main-character {
+        width: 190px;
+        height: 190px;
+    }
+
+    .small-character {
+        width: 60px;
+        height: 60px;
+        right: 5%;
+        bottom: 45px;
+    }
+
+    .letter {
+        padding: 15px;
+    }
+
+    .letter-content {
+        gap: 10px;
+    }
+
+    .letter-image,
+    .letter-image img {
+        min-height: 140px;
+        height: 140px;
+    }
+
+    .letter-text {
+        font-size: 11px;
+    }
+}
